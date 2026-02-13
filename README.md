@@ -150,3 +150,23 @@ if __name__ == "__main__":
 
 ```
 
+Rzut kością
+
+```
+import random
+
+print("🎲 Gra: Rzut kością")
+
+while True:
+    input("Naciśnij Enter, aby rzucić kością (lub wpisz q aby wyjść): ")
+    
+    wynik = random.randint(1, 6)
+    print(f"Wynik rzutu: {wynik}")
+    
+    wyjscie = input("Czy chcesz rzucić ponownie? (t/n): ")
+    if wyjscie.lower() != "t":
+        print("Koniec gry!")
+        break
+
+```
+
