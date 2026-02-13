@@ -73,3 +73,80 @@ while True:
     time.sleep(0.15)
 
 ```
+
+
+Krzyżyk kółko
+
+```
+import random
+
+def print_board(board):
+    print()
+    print(f" {board[0]} | {board[1]} | {board[2]}")
+    print("---+---+---")
+    print(f" {board[3]} | {board[4]} | {board[5]}")
+    print("---+---+---")
+    print(f" {board[6]} | {board[7]} | {board[8]}")
+    print()
+
+def check_winner(board, player):
+    win_positions = [
+        [0,1,2], [3,4,5], [6,7,8],  # wiersze
+        [0,3,6], [1,4,7], [2,5,8],  # kolumny
+        [0,4,8], [2,4,6]            # przekątne
+    ]
+    for pos in win_positions:
+        if board[pos[0]] == board[pos[1]] == board[pos[2]] == player:
+            return True
+    return False
+
+def is_draw(board):
+    return " " not in board
+
+def player_move(board):
+    while True:
+        try:
+            move = int(input("Wybierz pole (1-9): ")) - 1
+            if move in range(9) and board[move] == " ":
+                board[move] = "X"
+                break
+            else:
+                print("Nieprawidłowy ruch, spróbuj ponownie.")
+        except ValueError:
+            print("Wpisz liczbę od 1 do 9.")
+
+def computer_move(board):
+    available = [i for i in range(9) if board[i] == " "]
+    move = random.choice(available)
+    board[move] = "O"
+    print(f"Komputer wybrał pole {move + 1}")
+
+def main():
+    board = [" "] * 9
+    print("Gra w kółko i krzyżyk!")
+    print_board(board)
+
+    while True:
+        player_move(board)
+        print_board(board)
+        if check_winner(board, "X"):
+            print("Wygrałeś! 🎉")
+            break
+        if is_draw(board):
+            print("Remis!")
+            break
+
+        computer_move(board)
+        print_board(board)
+        if check_winner(board, "O"):
+            print("Komputer wygrał!")
+            break
+        if is_draw(board):
+            print("Remis!")
+            break
+
+if __name__ == "__main__":
+    main()
+
+```
+
